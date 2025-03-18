@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace Demo.DataAccess.Data.contexts
 {
-    internal class AppDbContext: DbContext
+    
+    public class AppDbContext: DbContext
     {
         public DbSet<Department> Departments { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-           optionsBuilder.UseSqlServer("Server=.;Database=DemoDb;Trusted_Connection=True;");
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        { 
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //   optionsBuilder.UseSqlServer("Server=.;Database=DemoDb;Trusted_Connection=True;");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
