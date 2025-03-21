@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Demo.DataAccess.Data.contexts;
 using Demo.DataAccess.Repositories;
+using Demo.BusinessLogic.Services;
 
 
 namespace Demo.Presntation
@@ -21,6 +22,7 @@ namespace Demo.Presntation
 
             //builder.Services.AddScoped<DepartmentRepo>();//3. register to services in the container
             builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
             #endregion
 
