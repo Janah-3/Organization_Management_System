@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using Demo.Presntation.Models;
+using Demo.Presntation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Presntation.Controllers
