@@ -1,5 +1,6 @@
 ﻿
 using Demo.DataAccess.Data.contexts;
+using Demo.DataAccess.Models.DepartmentModel;
 
 namespace Demo.DataAccess.Repositories
 {
