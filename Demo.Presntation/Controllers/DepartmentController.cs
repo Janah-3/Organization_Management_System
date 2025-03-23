@@ -58,6 +58,21 @@ namespace Demo.Presntation.Controllers
             return View(departmentDto);
         }
 
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                var department =_departmentService.GetDepartmentById(id.Value);
+                if (department == null) return NotFound();
+                return View(department);
+            }
+        }
+
 
     }
 }
