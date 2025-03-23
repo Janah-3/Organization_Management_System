@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Demo.DataAccess.Data.contexts;
-using Demo.DataAccess.Repositories;
 using Demo.BusinessLogic.Services;
+using Demo.DataAccess.Repositories.classes;
+using Demo.DataAccess.Repositories.interfaces;
 
 
 namespace Demo.Presntation

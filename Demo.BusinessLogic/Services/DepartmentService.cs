@@ -1,7 +1,6 @@
-﻿
-using Demo.DataAccess.Repositories;
-using Demo.BusinessLogic.Factories;
+﻿using Demo.BusinessLogic.Factories;
 using Demo.BusinessLogic.DataTransferObjects;
+using Demo.DataAccess.Repositories.interfaces;
 
 namespace Demo.BusinessLogic.Services
 {
