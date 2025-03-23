@@ -2,6 +2,7 @@
 using Demo.BusinessLogic.Services;
 using Demo.Presntation.ViewModels.Department;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace Demo.Presntation.Controllers
 {
@@ -149,6 +150,59 @@ namespace Demo.Presntation.Controllers
                 }
             return View(viewModel);
         }
+
+        #endregion
+
+        #region delete department
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if(!id.HasValue) return BadRequest();
+            var department = _departmentService.GetDepartmentById(id.Value);
+            if (department == null) return NotFound();
+            return View(department);
+
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            if (id ==0 ) return BadRequest();
+
+            try
+            {
+                bool Deleted = _departmentService.DeleteDepartment(id);
+
+                if (Deleted) return RedirectToAction(nameof(Index));
+
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "department is not deleted");
+                    return RedirectToAction(nameof(Delete) , new {id });
+                }
+            }
+            catch (Exception ex)
+            {
+                if (_environment.IsDevelopment())
+                {
+                    //1.development => log error in console and return same view with error message
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    RedirectToAction(nameof(Index));
+
+
+                }
+                else
+                {
+                    //2.deployment => log error in file or table in the database and return views
+                    _logger.LogError(ex.Message);
+                    return View("errorView" , ex);
+                }
+               
+            }
+          return RedirectToAction(nameof(Index));
+        }
+
 
         #endregion
 
