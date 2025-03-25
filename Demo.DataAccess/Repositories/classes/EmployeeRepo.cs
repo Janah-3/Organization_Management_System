@@ -11,6 +11,6 @@ namespace Demo.DataAccess.Repositories.classes
 {
     public class EmployeeRepo(AppDbContext dbContext) : GenericRepository<Employee>(dbContext), IEmployeeRepository
     {
-
+       
     }
 }

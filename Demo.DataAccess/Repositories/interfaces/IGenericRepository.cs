@@ -3,7 +3,7 @@ using Demo.DataAccess.Models.Shared;
 
 namespace Demo.DataAccess.Repositories.interfaces
 {
-    public interface IGenericRepository<TEntity> : BaseEntity
+    public interface IGenericRepository<TEntity> 
     {
         int Add(TEntity TEntity);
         IEnumerable<TEntity> GetAll(bool WithTracking = false);

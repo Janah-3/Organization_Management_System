@@ -7,7 +7,7 @@ using Demo.DataAccess.Models.EmployeeModel;
 
 namespace Demo.DataAccess.Repositories.interfaces
 {
-    internal interface IEmployeeRepository : IGenericRepository<Employee>
+    public interface IEmployeeRepository : IGenericRepository<Employee>
     {
        
     }
