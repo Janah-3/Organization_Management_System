@@ -4,13 +4,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.DataAccess.Models.DepartmentModel;
 
 namespace Demo.DataAccess.Data.contexts
 {
-    
+
     public class AppDbContext: DbContext
     {
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { 
