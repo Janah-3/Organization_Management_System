@@ -3,6 +3,7 @@ using Demo.DataAccess.Data.contexts;
 using Demo.BusinessLogic.Services;
 using Demo.DataAccess.Repositories.classes;
 using Demo.DataAccess.Repositories.interfaces;
+using Demo.BusinessLogic.Profiles;
 
 
 namespace Demo.Presntation
@@ -26,6 +27,7 @@ namespace Demo.Presntation
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepo>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddAutoMapper(m=> m.AddProfile(new MappingProfile()));
 
 
             #endregion

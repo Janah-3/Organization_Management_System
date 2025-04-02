@@ -1,16 +1,19 @@
 ﻿
+using AutoMapper;
 using Demo.BusinessLogic.DataTransferObjects.EmployeeDto;
 using Demo.BusinessLogic.Factories;
+using Demo.DataAccess.Models.EmployeeModel;
 using Demo.DataAccess.Repositories.classes;
 using Demo.DataAccess.Repositories.interfaces;
 
 namespace Demo.BusinessLogic.Services
 {
-    public class EmployeeService(IEmployeeRepository _EmployeeRepo) : IEmployeeService
+    public class EmployeeService(IEmployeeRepository _EmployeeRepo ,IMapper _mapper) : IEmployeeService
     {
         public int AddEmployee(CreateEmployeeDto EmployeeDto)
         {
-            var employee = EmployeeDto.ToEntity();
+          
+            var employee = _mapper.Map<CreateEmployeeDto,Employee>(EmployeeDto);
            return   _EmployeeRepo.Add(employee);
           
 
@@ -23,27 +26,32 @@ namespace Demo.BusinessLogic.Services
 
             else
             {
-                int result = _EmployeeRepo.remove(employee);
-                return result > 0 ? true : false;
+              employee.IsDeleted = true;
+              return  _EmployeeRepo.Update(employee) > 0 ? true : false;
             }
         }
 
         public IEnumerable<EmployeeDto>? GetAllEmployees()
         {
             var employees = _EmployeeRepo.GetAll();
-            return employees.Select(e => e.ToEmployeeDto()).ToList();
+            //src => employee
+            // dest => employeeDto
+            var employeeDto = _mapper.Map<IEnumerable<Employee>,IEnumerable< EmployeeDto>>(employees);
+            return employeeDto;
         }
 
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
             var employee = _EmployeeRepo.GetById(id);
-            return employee?.ToEmployeeDetailsDto();
+            var employeeDto = _mapper.Map<Employee, EmployeeDetailsDto>(employee);
+            return employeeDto;
+
         }
 
         public int UpdateEmployee(UpdatedEmployeeDto EmployeeDto)
         {
-            var employee = EmployeeDto.ToEntity();
-            return _EmployeeRepo.Update(employee);
+         
+            return _EmployeeRepo.Update(_mapper.Map<UpdatedEmployeeDto, Employee>(EmployeeDto));
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Demo.BusinessLogic.DataTransferObjects
+namespace Demo.BusinessLogic.DataTransferObjects.Department
 {
     public class DepartmentDetailsDto
     {
