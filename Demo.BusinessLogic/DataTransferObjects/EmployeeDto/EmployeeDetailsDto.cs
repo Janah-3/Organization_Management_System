@@ -21,6 +21,11 @@ namespace Demo.BusinessLogic.DataTransferObjects.EmployeeDto
         public Gender Gender { get; set; }
         public DateTime HiringDate { get; set; }
         public EmployeeType employeeType { get; set; }
-      
+        public int CreatedBy { get; set; } //user_id
+        public DateTime CreatedOn { get; set; } //creation_date
+        public int LastModifiedBy { get; set; } //modified_by
+        public DateTime? LastModifiedOn { get; set; } //modifications_date
+        public bool IsDeleted { get; set; } //soft delete
+
     }
 }

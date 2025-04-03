@@ -21,8 +21,10 @@ namespace Demo.BusinessLogic.Profiles
            
             CreateMap<Employee, UpdatedEmployeeDto>();
             CreateMap<UpdatedEmployeeDto, Employee>();
-            
-        }
+            CreateMap<Employee, EmployeeDetailsDto>();
+        
+
+    }
         
             
         
