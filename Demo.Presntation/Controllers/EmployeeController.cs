@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Presntation.Controllers
 {
-    public class EmployeeController(IEmployeeService _employeeService , IWebHostEnvironment Environment , ILogger<EmployeeController> Logger) : Controller
+    public class EmployeeController(IEmployeeService _employeeService, IWebHostEnvironment Environment, ILogger<EmployeeController> Logger) : Controller
     {
         public IActionResult Index()
         {
@@ -22,8 +22,8 @@ namespace Demo.Presntation.Controllers
             if (ModelState.IsValid)
             {
                 try
-               {
-                  int result =  _employeeService.AddEmployee(employeeDto);
+                {
+                    int result = _employeeService.AddEmployee(employeeDto);
                     if (result > 0)
                         return RedirectToAction("Index");
                     else
@@ -32,7 +32,7 @@ namespace Demo.Presntation.Controllers
                 }
                 catch (Exception ex)
                 {
-                    if(Environment.IsDevelopment())
+                    if (Environment.IsDevelopment())
                     {
                         ModelState.AddModelError("", ex.Message);
                     }
@@ -50,16 +50,16 @@ namespace Demo.Presntation.Controllers
         public IActionResult Details(int? id)
         {
             if (!id.HasValue) return BadRequest();
-            
-                var employee = _employeeService.GetEmployeeById(id.Value);
-                return employee is null ? NotFound() : View(employee);
-            
+
+            var employee = _employeeService.GetEmployeeById(id.Value);
+            return employee is null ? NotFound() : View(employee);
+
         }
 
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if(!id.HasValue) return BadRequest();
+            if (!id.HasValue) return BadRequest();
 
             var employee = _employeeService.GetEmployeeById(id.Value);
             if (employee is null) return NotFound();
@@ -82,10 +82,10 @@ namespace Demo.Presntation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute]int? id ,UpdatedEmployeeDto employeeDto)
+        public IActionResult Edit([FromRoute] int? id, UpdatedEmployeeDto employeeDto)
         {
 
-            if (!id.HasValue || id!= employeeDto.Id) return BadRequest();
+            if (!id.HasValue || id != employeeDto.Id) return BadRequest();
 
 
             if (ModelState.IsValid)
@@ -115,5 +115,32 @@ namespace Demo.Presntation.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            if (id <= 0) return BadRequest();
+
+            try
+            {
+                bool result = _employeeService.DeleteEmployee(id);
+                if (result)
+                    return RedirectToAction("Index");
+                else
+                    ModelState.AddModelError("", "Failed to delete employee.");
+            }
+            catch (Exception ex)
+            {
+                if (Environment.IsDevelopment())
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "An error occurred while deleting the employee.");
+                    Logger.LogError(ex, "An error occurred while deleting the employee.");
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
