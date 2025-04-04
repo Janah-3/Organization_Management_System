@@ -22,6 +22,7 @@ namespace Demo.Presntation.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
+      ///  [ValidateAntiForgeryToken]//action method to prevent cross site forgery attacks
         public IActionResult Create(CreatedDepartmentDto departmentDto) 
       
         {
