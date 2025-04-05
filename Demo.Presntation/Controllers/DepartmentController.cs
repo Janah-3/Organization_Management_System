@@ -23,9 +23,16 @@ namespace Demo.Presntation.Controllers
 
         [HttpPost]
       ///  [ValidateAntiForgeryToken]//action method to prevent cross site forgery attacks
-        public IActionResult Create(CreatedDepartmentDto departmentDto) 
-      
+        public IActionResult Create(DepartmentViewModel departmentViewModel)    {
+
+            var departmentDto = new CreatedDepartmentDto()
         {
+            Code = departmentViewModel.Code,
+            Name = departmentViewModel.Name,
+            description = departmentViewModel.Description,
+            DateOfCreation = departmentViewModel.DateofCreation
+        };
+
             if (ModelState.IsValid)
             {
                 try
@@ -90,7 +97,7 @@ namespace Demo.Presntation.Controllers
             if (!id.HasValue) return BadRequest();
             var department = _departmentService.GetDepartmentById(id.Value);
             if (department == null) return NotFound();
-            var departmentViewModel = new DepartmentEditViewModel()
+            var departmentViewModel = new DepartmentViewModel()
             {
                 Code = department.Code,
                 Name = department.Name,
@@ -104,7 +111,7 @@ namespace Demo.Presntation.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(int id ,DepartmentEditViewModel viewModel)
+        public IActionResult Edit([FromRoute]int id ,DepartmentViewModel viewModel)
         {
             
 
