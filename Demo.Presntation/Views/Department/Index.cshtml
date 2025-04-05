@@ -3,7 +3,16 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+	var dept = ViewData["message"] as DepartmentDto;
 }
+
+<div class="alert alert-success">
+    @dept.Name;
+    <br />
+    @ViewBag.message.Name
+</div>
+
+
 
 <h1 class="my-3" >All Departments</h1>
 <a class="btn btn-primary my-4  p-1" asp-controller="Department" asp-action="Create">Create new department</a>

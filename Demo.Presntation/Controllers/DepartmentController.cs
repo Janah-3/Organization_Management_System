@@ -1,6 +1,7 @@
 ﻿using Demo.BusinessLogic.DataTransferObjects;
 using Demo.BusinessLogic.DataTransferObjects.Department;
 using Demo.BusinessLogic.Services;
+using Demo.DataAccess.Models.DepartmentModel;
 using Demo.Presntation.ViewModels.Department;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
@@ -12,6 +13,8 @@ namespace Demo.Presntation.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["message"] = new Department() { Name = "test view data" };
+            ViewBag.message = new Department() { Name="test view bag"};
             var departments = _departmentService.GetAllDepartments();
             return View(departments);
         }
