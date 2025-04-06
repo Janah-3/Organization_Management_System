@@ -1,11 +1,12 @@
 ﻿using Demo.BusinessLogic.DataTransferObjects.EmployeeDto;
 using Demo.BusinessLogic.Services;
 using Demo.DataAccess.Models.Shared.Enum;
+using Demo.Presntation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Presntation.Controllers
 {
-    public class EmployeeController(IEmployeeService _employeeService, IWebHostEnvironment Environment, ILogger<EmployeeController> Logger) : Controller
+    public class EmployeeController(IEmployeeService _employeeService, IWebHostEnvironment Environment, ILogger<EmployeeController> Logger ) : Controller
     {
         public IActionResult Index()
         {
@@ -14,15 +15,38 @@ namespace Demo.Presntation.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create() => View();
+        public IActionResult Create()
+        {
+          
+          
+            return View();
+        }
 
         [HttpPost]
-        public IActionResult Create(CreateEmployeeDto employeeDto)
+        public IActionResult Create(EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
                 try
+
                 {
+                    var employeeDto = new CreateEmployeeDto()
+                    {
+                        Name = employeeViewModel.Name,
+                        Age = employeeViewModel.Age,
+                        Address = employeeViewModel.Address,
+                        salary = employeeViewModel.salary,
+                        IsActive = employeeViewModel.IsActive,
+                        Email = employeeViewModel.Email,
+                        employeeType = employeeViewModel.employeeType,
+                        HiringDate = employeeViewModel.HiringDate,
+                        DepartmentId = employeeViewModel.DepartmentId,
+                        PhoneNumber = employeeViewModel.PhoneNumber,
+                        CreatedBy =employeeViewModel.CreatedBy,
+                        LastModifiedBy = employeeViewModel.LastModifiedBy,
+
+
+                    };
                     int result = _employeeService.AddEmployee(employeeDto);
                     if (result > 0)
                         return RedirectToAction("Index");
@@ -43,7 +67,7 @@ namespace Demo.Presntation.Controllers
                     }
                 }
             }
-            return View(employeeDto);
+            return View(employeeViewModel);
         }
 
         [HttpGet]
@@ -64,9 +88,9 @@ namespace Demo.Presntation.Controllers
             var employee = _employeeService.GetEmployeeById(id.Value);
             if (employee is null) return NotFound();
 
-            var employeeDto = new UpdatedEmployeeDto()
+            var employeeViewModel = new EmployeeViewModel()
             {
-                Id = employee.Id,
+             
                 Name = employee.Name,
                 salary = employee.salary,
                 Address = employee.Address,
@@ -74,19 +98,38 @@ namespace Demo.Presntation.Controllers
                 PhoneNumber = employee.PhoneNumber,
                 IsActive = employee.IsActive,
                 HiringDate = employee.HiringDate,
+                CreatedBy = employee.CreatedBy,
+                LastModifiedBy = employee.LastModifiedBy,
+                DepartmentId = employee.DepartmentId,
+                Gender = employee.Gender,
 
             };
 
-            return View(employeeDto);
+            return View(employeeViewModel);
 
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int? id, UpdatedEmployeeDto employeeDto)
+        public IActionResult Edit([FromRoute] int? id, EmployeeViewModel employeeViewModel)
         {
+          
 
-            if (!id.HasValue || id != employeeDto.Id) return BadRequest();
+            if (!id.HasValue ) return BadRequest();
 
+            var employeeDto = new UpdatedEmployeeDto()
+            {
+                Id = employeeViewModel.Id,
+                Name = employeeViewModel.Name,
+                salary = employeeViewModel.salary,
+                Address = employeeViewModel.Address,
+                Age = employeeViewModel.Age,
+                PhoneNumber = employeeViewModel.PhoneNumber,
+                IsActive = employeeViewModel.IsActive,
+                HiringDate = employeeViewModel.HiringDate,
+                CreatedBy = employeeViewModel.CreatedBy,
+                LastModifiedBy = employeeViewModel.LastModifiedBy,
+                DepartmentId = employeeViewModel.DepartmentId,
+            };
 
             if (ModelState.IsValid)
             {
