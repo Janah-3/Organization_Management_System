@@ -40,16 +40,15 @@ namespace Demo.Presntation.Controllers
             {
                 try
                 {
+                    string message;
                     int result = _departmentService.AddDepartment(departmentDto);
                     if (result > 0)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
+                        message = $"department {departmentDto.Name} is created successfully";
                     else
-                    {
-                        ModelState.AddModelError(string.Empty, "Depaartment can't be created");
-                        return View();
-                    }
+                        message = $"department {departmentDto.Name} can not be created";
+
+                    TempData["message"] = message;
+                    return RedirectToAction(nameof(Index), new { message });
 
                 }
                 catch (Exception ex)
