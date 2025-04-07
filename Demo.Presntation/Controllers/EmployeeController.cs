@@ -100,7 +100,8 @@ namespace Demo.Presntation.Controllers
                 HiringDate = employee.HiringDate,
                 CreatedBy = employee.CreatedBy,
                 LastModifiedBy = employee.LastModifiedBy,
-                DepartmentId = employee.DepartmentId,
+                DepartmentId= employee.DepartmentId,
+               
                 Gender = employee.Gender,
 
             };

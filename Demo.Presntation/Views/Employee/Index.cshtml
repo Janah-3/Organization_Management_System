@@ -17,6 +17,7 @@
                 <th>@Html.DisplayNameFor(e => e.Email)</th>
                 <th>@Html.DisplayNameFor(e => e.empType)</th>
                 <th>@Html.DisplayNameFor(e => e.Age)</th>
+                <th>@Html.DisplayNameFor(e => e.Department)</th>
                 <th>@Html.DisplayNameFor(e => e.salary)</th>
                 <th>@Html.DisplayNameFor(e => e.IsActive)</th>
                 <th>@Html.DisplayNameFor(e => e.empGender)</th>
@@ -34,6 +35,7 @@
                     <td>@employee.Email</td>
                     <td>@employee.empType</td>
                     <td>@employee.Age</td>
+                    <td>@(string.IsNullOrEmpty(employee.Department)? "no department": employee.Department) </td>
                     <td>@Html.DisplayFor(e => employee.salary)</td>
                     <td>
                         <i class="fa @(employee.IsActive?  "fa-solid fa-circle-check text-success" : "fa-time-circle-check text-danger")"></i>

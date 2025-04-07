@@ -11,10 +11,12 @@ namespace Demo.BusinessLogic.Profiles
         {
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(dest => dest.empGender,options => options.MapFrom(src => src.Gender))
-                .ForMember(dest=> dest.empType , options => options.MapFrom(src => src.employeeType));
+                .ForMember(dest=> dest.empType , options => options.MapFrom(src => src.employeeType))
+                .ForMember(dest => dest.Department, options => options.MapFrom(src => src.Department != null ? src.Department.Name : null));
 
             CreateMap<Employee, EmployeeDetailsDto>()
-                .ForMember(dest=> dest.HiringDate , options => options.MapFrom(src => DateOnly.FromDateTime(src.HiringDate)));
+                .ForMember(dest=> dest.HiringDate , options => options.MapFrom(src => DateOnly.FromDateTime(src.HiringDate)))
+                .ForMember(dest => dest.Department, options => options.MapFrom(src => src.Department != null ? src.Department.Name : null)); ;
             ;
 
             CreateMap<CreateEmployeeDto, Employee>().ReverseMap();

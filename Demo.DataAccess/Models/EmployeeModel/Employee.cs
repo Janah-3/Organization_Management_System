@@ -23,7 +23,7 @@ namespace Demo.DataAccess.Models.EmployeeModel
         public EmployeeType employeeType { get; set; }
 
         public int? DepartmentId { get; set; } //FK
-        public Department? Department { get; set; } //navigation property
+    public  virtual   Department? Department { get; set; } //navigation property
 
     }
 }

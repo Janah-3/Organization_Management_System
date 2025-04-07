@@ -26,7 +26,9 @@ namespace Demo.BusinessLogic.DataTransferObjects.EmployeeDto
         public int LastModifiedBy { get; set; } //modified_by
         public DateTime? LastModifiedOn { get; set; } //modifications_date
         public bool IsDeleted { get; set; } //soft delete
-        public int? DepartmentId { get; set; } //FK
+        public string? Department { get; set; } 
+
+        public int? DepartmentId { get; set; }
 
     }
 }
