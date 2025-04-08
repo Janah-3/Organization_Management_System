@@ -29,9 +29,9 @@ namespace Demo.Presntation
             });
 
             //builder.Services.AddScoped<DepartmentRepo>();//3. register to services in the container
-            builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+            //builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepo>();
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepo>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddAutoMapper(m=> m.AddProfile(new MappingProfile()));
             //builder.Services.AddScoped<IWebHostEnvironment >
