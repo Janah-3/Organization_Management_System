@@ -31,15 +31,30 @@ namespace Demo.BusinessLogic.Services
             }
         }
 
+      
+
         public IEnumerable<EmployeeDto>? GetAllEmployees()
         {
-            var employees = _EmployeeRepo.GetAll();
-            //src => employee
-            // dest => employeeDto
-            var employeeDto = _mapper.Map<IEnumerable<Employee>,IEnumerable< EmployeeDto>>(employees);
+            throw new NotImplementedException();
+        }
+
+
+
+        public IEnumerable<EmployeeDto>? GetAllEmployees(string? EmployeeSearchName)
+        {
+            IEnumerable<Employee> employees;
+            if (string.IsNullOrEmpty(EmployeeSearchName))
+
+                employees = _EmployeeRepo.GetAll();
+            else
+
+                employees = _EmployeeRepo.GetAll(E => E.Name.ToLower().Contains(EmployeeSearchName.ToLower()));
+
+            var employeeDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
             return employeeDto;
         }
 
+        
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
             var employee = _EmployeeRepo.GetById(id);

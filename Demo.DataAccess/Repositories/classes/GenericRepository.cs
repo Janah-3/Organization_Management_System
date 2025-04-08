@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Demo.DataAccess.Data.contexts;
@@ -49,5 +50,10 @@ namespace Demo.DataAccess.Repositories.classes
                 return _dbContext.SaveChanges();
 
             }
+
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dbContext.Set<TEntity>().Where(predicate).ToList();
         }
+    }
 }

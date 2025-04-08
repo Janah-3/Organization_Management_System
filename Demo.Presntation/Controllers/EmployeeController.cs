@@ -8,9 +8,10 @@ namespace Demo.Presntation.Controllers
 {
     public class EmployeeController(IEmployeeService _employeeService, IWebHostEnvironment Environment, ILogger<EmployeeController> Logger ) : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string? EmployeeSearchName)
         {
-            var employees = _employeeService.GetAllEmployees();
+
+            var employees = _employeeService.GetAllEmployees(EmployeeSearchName);
             return View(employees);
         }
 

@@ -7,7 +7,7 @@ namespace Demo.BusinessLogic.Services
     {
         int AddEmployee(CreateEmployeeDto EmployeeDto);
         bool DeleteEmployee(int id);
-        IEnumerable<EmployeeDto>? GetAllEmployees();
+        IEnumerable<EmployeeDto>? GetAllEmployees(string? EmployeeSearchName);
         EmployeeDetailsDto? GetEmployeeById(int id);
         int UpdateEmployee(UpdatedEmployeeDto EmployeeDto);
     }
