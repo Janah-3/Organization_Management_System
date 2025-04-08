@@ -5,6 +5,7 @@ using Demo.DataAccess.Repositories.classes;
 using Demo.DataAccess.Repositories.interfaces;
 using Demo.BusinessLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
+using Demo.DataAccess.Repositories;
 
 
 namespace Demo.Presntation
@@ -34,6 +35,7 @@ namespace Demo.Presntation
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddAutoMapper(m=> m.AddProfile(new MappingProfile()));
             //builder.Services.AddScoped<IWebHostEnvironment >
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
             #endregion

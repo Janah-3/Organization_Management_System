@@ -29,18 +29,18 @@ namespace Demo.DataAccess.Repositories.classes
             public TEntity GetById(int id) => _dbContext.Set<TEntity>().Find(id);
 
             //update TEntity
-            public int Update(TEntity Entity)
+            public void Update(TEntity Entity)
             {
                 _dbContext.Set<TEntity>().Update(Entity);
-                return _dbContext.SaveChanges();
+                
             }
 
             //delete TEntity
-            public int remove(TEntity Entity)
+            public void remove(TEntity Entity)
             {
 
                 _dbContext.Set<TEntity>().Remove(Entity);
-                return _dbContext.SaveChanges();
+               
             }
 
             //add TEntity(insert)
@@ -54,6 +54,11 @@ namespace Demo.DataAccess.Repositories.classes
         public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbContext.Set<TEntity>().Where(predicate).ToList();
+        }
+
+        void IGenericRepository<TEntity>.Add(TEntity TEntity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

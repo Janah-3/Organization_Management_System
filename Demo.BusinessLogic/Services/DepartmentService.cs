@@ -1,15 +1,16 @@
 ﻿using Demo.BusinessLogic.Factories;
 using Demo.DataAccess.Repositories.interfaces;
 using Demo.BusinessLogic.DataTransferObjects.Department;
+using Demo.DataAccess.Repositories;
 
 namespace Demo.BusinessLogic.Services
 {
-    public class DepartmentService(IDepartmentRepo _departmentRepo) : IDepartmentService
+    public class DepartmentService(IUnitOfWork unitOfWork) : IDepartmentService
     {
 
         public IEnumerable<DepartmentDto>? GetAllDepartments()
         {
-            var departments = _departmentRepo.GetAll();
+            var departments = unitOfWork.DepartmentRepository.GetAll();
 
 
             //manual mapping or coverting the department into departmentDto
@@ -30,7 +31,7 @@ namespace Demo.BusinessLogic.Services
         //get department by id 
         public DepartmentDetailsDto? GetDepartmentById(int id)
         {
-            var department = _departmentRepo.GetById(id);
+            var department = unitOfWork.DepartmentRepository.GetById(id);
 
             //manual mapping
             //auto mapping //most used for big projects
@@ -45,22 +46,30 @@ namespace Demo.BusinessLogic.Services
         public int AddDepartment(CreatedDepartmentDto departmentDto)
         {
             var department = departmentDto.ToEntity();
-            return _departmentRepo.Add(department);
+             unitOfWork.DepartmentRepository.Add(department);
+           return  unitOfWork.SaveChanges();
+
         }
 
         //update department
-        public int UpdateDepartment(UpdatedDepartmentDto departmentDto) => _departmentRepo.Update(departmentDto.ToEntity());
+        public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
+        {
+            unitOfWork.DepartmentRepository.Update(departmentDto.ToEntity());
+            return unitOfWork.SaveChanges();
+        }
 
         //delete Department 
         public bool DeleteDepartment(int id)
         {
-            var Dept = _departmentRepo.GetById(id);
+            var Dept = unitOfWork.DepartmentRepository.GetById(id);
             if (Dept is null) return false;
 
             else
             {
-                int result = _departmentRepo.remove(Dept);
-                return result > 0 ? true : false;
+                  unitOfWork.DepartmentRepository.remove(Dept);
+                int result = unitOfWork.SaveChanges();
+                if (result > 0) return true;
+                else return false; ;
             }
         }
 
