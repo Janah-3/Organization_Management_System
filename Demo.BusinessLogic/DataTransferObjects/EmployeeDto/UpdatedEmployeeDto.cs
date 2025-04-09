@@ -24,5 +24,6 @@ namespace Demo.BusinessLogic.DataTransferObjects.EmployeeDto
         public EmployeeType employeeType { get; set; }
         public int CreatedBy { get; set; }
         public int LastModifiedBy { get; set; }
+        public int? DepartmentId { get; set; } //FK
     }
 }

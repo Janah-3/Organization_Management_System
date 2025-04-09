@@ -9,7 +9,9 @@ namespace Demo.DataAccess.Data.configrations
             builder.Property(d => d.Id).UseIdentityColumn(10, 10);
             builder.Property(d => d.Name).HasColumnType("varchar(20)");
             builder.Property(d => d.Code).HasColumnType("varchar(20)");
-            
+
+
+
             base.Configure(builder);
         }
     }

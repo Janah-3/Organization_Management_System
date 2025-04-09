@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.DataAccess.Models.DepartmentModel;
 using Demo.DataAccess.Models.Shared;
 using Demo.DataAccess.Models.Shared.Enum;
 
@@ -20,6 +21,9 @@ namespace Demo.DataAccess.Models.EmployeeModel
         public Gender Gender { get; set; }   
         public DateTime HiringDate { get; set; }
         public EmployeeType employeeType { get; set; }
+
+        public int? DepartmentId { get; set; } //FK
+    public  virtual   Department? Department { get; set; } //navigation property
 
     }
 }
