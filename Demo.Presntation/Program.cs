@@ -6,6 +6,7 @@ using Demo.DataAccess.Repositories.interfaces;
 using Demo.BusinessLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
 using Demo.DataAccess.Repositories;
+using Demo.BusinessLogic.Services.AttachmentServices;
 
 
 namespace Demo.Presntation
@@ -28,13 +29,14 @@ namespace Demo.Presntation
                 options.UseLazyLoadingProxies();
             });
 
-            //builder.Services.AddScoped<DepartmentRepo>();//3. register to services in the container
-            //builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
+            builder.Services.AddScoped<DepartmentRepo>();//3. register to services in the container
+            builder.Services.AddScoped<IDepartmentRepo, DepartmentRepo>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepo>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepo>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddAutoMapper(m=> m.AddProfile(new MappingProfile()));
             //builder.Services.AddScoped<IWebHostEnvironment >
+            builder.Services.AddScoped<IAttachmentService, AttachmentService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

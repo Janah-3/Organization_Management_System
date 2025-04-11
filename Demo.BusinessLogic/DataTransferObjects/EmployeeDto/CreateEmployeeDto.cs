@@ -1,6 +1,7 @@
 ﻿
 using Demo.DataAccess.Models.EmployeeModel;
 using Demo.DataAccess.Models.Shared.Enum;
+using Microsoft.AspNetCore.Http;
 
 namespace Demo.BusinessLogic.DataTransferObjects.EmployeeDto
 {
@@ -19,6 +20,7 @@ namespace Demo.BusinessLogic.DataTransferObjects.EmployeeDto
         public int CreatedBy { get; set; }
         public int LastModifiedBy { get; set; } 
         public int? DepartmentId { get; set; } //FK
+        public IFormFile? Image { get; set; }
 
     }
 }

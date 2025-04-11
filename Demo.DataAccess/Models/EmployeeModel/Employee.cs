@@ -25,5 +25,7 @@ namespace Demo.DataAccess.Models.EmployeeModel
         public int? DepartmentId { get; set; } //FK
     public  virtual   Department? Department { get; set; } //navigation property
 
+        public string?  ImageName { get; set; }
+
     }
 }

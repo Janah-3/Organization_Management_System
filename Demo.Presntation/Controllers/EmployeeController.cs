@@ -45,9 +45,10 @@ namespace Demo.Presntation.Controllers
                         PhoneNumber = employeeViewModel.PhoneNumber,
                         CreatedBy =employeeViewModel.CreatedBy,
                         LastModifiedBy = employeeViewModel.LastModifiedBy,
-
+                        Image = employeeViewModel.Image
 
                     };
+
                     int result = _employeeService.AddEmployee(employeeDto);
                     if (result > 0)
                         return RedirectToAction("Index");
