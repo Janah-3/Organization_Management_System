@@ -4,7 +4,7 @@ namespace Demo.Presntation.ViewModels;
 
 public class RegisterViewModel
 {
-    [Required]
+    [Required(ErrorMessage ="firs name can not be empty")]
     [MaxLength(50)]
     public string FirstName { get; set; }
     [Required]

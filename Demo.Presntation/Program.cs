@@ -7,6 +7,8 @@ using Demo.BusinessLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
 using Demo.DataAccess.Repositories;
 using Demo.BusinessLogic.Services.AttachmentServices;
+using Demo.DataAccess.Models.IdentityModel;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace Demo.Presntation
@@ -38,6 +40,16 @@ namespace Demo.Presntation
             //builder.Services.AddScoped<IWebHostEnvironment >
             builder.Services.AddScoped<IAttachmentService, AttachmentService>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+                option =>
+                {
+                    //option.User.RequireUniqueEmail = true;
+                }
+                )
+                .AddEntityFrameworkStores<AppDbContext>();
+
+
+                
 
 
             #endregion
